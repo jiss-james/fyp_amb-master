@@ -1,0 +1,47 @@
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Activity name:</strong>
+  <%= @activity.activity_name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @activity.description %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @activity.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @activity.end_date %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @activity.location %>
+</p>
+
+<p>
+  <strong>Vehicle:</strong>
+  <%= @activity.vehicle %>
+</p>
+
+<p>
+  <strong>Mobile:</strong>
+  <%= @activity.mobile %>
+</p>
+
+<p>
+  <strong>Telephone:</strong>
+  <%= @activity.telephone %>
+</p>
+
+<%= link_to 'Edit', edit_company_activity_path(@company, @activity), class:"btn btn-primary" %> |
+<%= link_to 'Back', company_activities_path(@company), class:"btn btn-default" %>
+
+</div>

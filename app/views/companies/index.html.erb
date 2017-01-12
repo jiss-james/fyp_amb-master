@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+
+
+  <% if can? :create, Company %>
+  <%= link_to 'New Company', new_company_path, class:"btn btn-default" %>
+  <%end%>
+
+  <h1>Your Organisation(s)</h1>
+  <br/>
+
+  <div class="row">
+  <% @companies.each do |company| %>
+    <div class="col-md-6">
+      <div class="card">
+        <img alt="Card image cap" class="card-img-top" src="..."/>
+        <div class="card-block">
+          <h4 class="card-title">
+            <%= company.company_name %>
+          </h4>
+          <% # %p.card-text= company.description %>
+          <%= link_to 'Show', company, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+  <br>
+
+</div>

@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+
+  <p>
+    <strong>Company name:</strong>
+    <%= @company.company_name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @company.description %>
+  </p>
+
+  <p>
+    <strong>Location:</strong>
+    <%= @company.location %>
+  </p>
+
+  <% if can? :update, @company %>
+  <%= link_to 'Edit', edit_company_path(@company), class: "btn btn-primary" %>
+  <% end %>
+  |
+  <%= link_to 'Back', companies_path, class: "btn btn-default" %>
+  <br/>
+  <br/>
+
+  <% if can? :create, Activity %>
+  <%= link_to "New Activity", new_company_activity_path(@company), class: "btn btn-success" %>
+  <br/>
+  <% end %>
+
+  <h3>All related activities:</h3>
+
+  <div class="row">
+  <% @company.activities.each do |activity| %>
+    <div class="col-md-6">
+      <div class="card">
+        <img alt="Card image cap" class="card-img-top" src="..."/>
+        <div class="card-block">
+          <h4 class="card-title">
+            <%= activity.activity_name %>
+          </h4>
+          <% # %p.card-text= company.description %>
+          <%= link_to 'Show', company_activity_path(@company, activity), class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+ </div>
+
+</div>

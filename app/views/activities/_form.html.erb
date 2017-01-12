@@ -1,0 +1,62 @@
+<%= form_for @activity, url: company_activities_path(@company), method: :post do |f| %>
+  <% if @activity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
+
+      <ul>
+      <% @activity.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container">
+
+  <div class="form-group">
+    <%= f.label :activity_name %>
+    <%= f.text_field :activity_name, class:"form-control", placeholder:"Activity Name", autofocus: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class:"form-control", placeholder:"Activity Description", rows:"10" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :start_date %>
+    <%= f.date_select :start_date, class:"form-control", default: Date.today, start_year: Date.today.year %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_date %>
+    <%= f.date_select :end_date, class:"form-control", default: Date.today, start_year: Date.today.year %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :location %>
+    <%= f.text_field :location, class:"form-control", placeholder:"Your Location" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :vehicle %>
+    <%= f.check_box :vehicle  %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :mobile %>
+    <%= f.text_field :mobile, class:"form-control", placeholder:"Mobile Number" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :telephone %>
+    <%= f.text_field :telephone, class:"form-control", placeholder:"Telephone Number" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit  class:"btn btn-success"%>
+  </div>
+  
+<% end %>
+
+ </div>

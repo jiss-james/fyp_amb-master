@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  activity_name: MyString
+  description: MyText
+  start_date: 2016-12-25 10:19:25
+  end_date: 2016-12-25 10:19:25
+  location: MyString
+  vehicle: false
+  mobile: MyString
+  telephone: MyString
+
+two:
+  activity_name: MyString
+  description: MyText
+  start_date: 2016-12-25 10:19:25
+  end_date: 2016-12-25 10:19:25
+  location: MyString
+  vehicle: false
+  mobile: MyString
+  telephone: MyString
