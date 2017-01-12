@@ -9,5 +9,10 @@ class User < ApplicationRecord
   enum gender: [ :male, :female ]
 
   has_many :companies, dependent: :destroy
-  
+
+  geocoded_by :current_location
+  after_validation :geocode
+
+  after_validation :geocode, if: ->(obj){ obj.current_location.present? and obj.current_location_changed? }
+
 end

@@ -19,8 +19,8 @@
   Address: <%= @user.current_location %>
   (Latitude: <%= @user.latitude %> Longitude: <%= @user.longitude%>)
   <br/>
-  <!-- <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@user.latitude},#{@user.longitude}&markers=#{@user.latitude},#{@user.longitude}&zoom=15&size=640x400&key=AIzaSyBNjdwrpQ8D6O542G7gyNngdexq77DvVS8",
-                class: 'img-fluid img-rounded', alt: "#{@user.current_location} on the map"%> -->
+  <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@user.latitude},#{@user.longitude}&markers=#{@user.latitude},#{@user.longitude}&zoom=15&size=640x400&key=AIzaSyBNjdwrpQ8D6O542G7gyNngdexq77DvVS8",
+                class: 'img-fluid img-rounded', alt: "#{@user.current_location} on the map"%>
 
   <% if can? :update, User %>
   <%= link_to 'Edit Profile', edit_user_registration_path, class:"btn btn-primary" %>

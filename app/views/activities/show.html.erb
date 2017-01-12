@@ -26,6 +26,9 @@
   <%= @activity.location %>
 </p>
 
+<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@activity.latitude},#{@activity.longitude}&markers=#{@activity.latitude},#{@activity.longitude}&zoom=15&size=640x400&key=AIzaSyBNjdwrpQ8D6O542G7gyNngdexq77DvVS8",
+              class: 'img-fluid img-rounded', alt: "#{@activity.location} on the map"%>
+
 <p>
   <strong>Vehicle:</strong>
   <%= @activity.vehicle %>
@@ -42,6 +45,8 @@
 </p>
 
 <%= link_to 'Edit', edit_company_activity_path(@company, @activity), class:"btn btn-primary" %> |
-<%= link_to 'Back', company_activities_path(@company), class:"btn btn-default" %>
+<%= link_to 'Back', company_activities_path(@company), class:"btn btn-default" %> |
+<%= link_to "Delete", company_activity_path(@company, @activity), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger" %></p>
+
 
 </div>

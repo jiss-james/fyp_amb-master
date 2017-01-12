@@ -65,7 +65,7 @@ class ActivitiesController < ApplicationController
 
     @activity.destroy
     respond_to do |format|
-      format.html { redirect_to company_activities @company, notice: 'Activity was successfully destroyed.' }
+      format.html { redirect_to company_activities_path @company, notice: 'Activity was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
