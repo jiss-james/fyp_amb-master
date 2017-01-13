@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170112111213) do
+ActiveRecord::Schema.define(version: 20170112130411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,10 +65,12 @@ ActiveRecord::Schema.define(version: 20170112111213) do
     t.integer  "gender"
     t.boolean  "vehicle"
     t.boolean  "available_for_work"
+    t.string   "current_location"
     t.text     "description"
+    t.string   "likes"
     t.text     "work_experience"
     t.boolean  "admin",                  default: false
-    t.string   "current_location"
+    t.string   "image"
     t.float    "latitude"
     t.float    "longitude"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

@@ -1,4 +1,9 @@
 <div class="container">
+
+  <%= image_tag(@user.image_url(:med)) if @user.image? %>
+
+<!-- <%= image_tag(@user.image_url)  %> -->
+
   <h1><%= @user.first_name %> <%= @user.last_name %></h1>
 
   Date of Birth: <%= @user.date_of_birth.strftime("%B %d, %Y") %>
@@ -22,6 +27,8 @@
   <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@user.latitude},#{@user.longitude}&markers=#{@user.latitude},#{@user.longitude}&zoom=15&size=640x400&key=AIzaSyBNjdwrpQ8D6O542G7gyNngdexq77DvVS8",
                 class: 'img-fluid img-rounded', alt: "#{@user.current_location} on the map"%>
 
+  <br/>
+  <br/>
   <% if can? :update, User %>
   <%= link_to 'Edit Profile', edit_user_registration_path, class:"btn btn-primary" %>
   <%end%>

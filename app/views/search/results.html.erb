@@ -22,15 +22,14 @@
         <%= link_to "Go to Activity", company_activity_path(result.company_id, result.id), class:"btn btn-primary" %>
       </div>
     <% elsif result.class.to_s == "User" %>
-      <div class="card card-block">
-        <h4 class="card-title">
-          <%= result.first_name %>
-        </h4>
-        <p class="card-text">
-          <%= result.description %>
-        </p>
+    <div class="card" style="width: 20rem;">
+      <%= image_tag result.image_url(:thumb), class:"card-img-top" %>
+      <div class="card-block">
+        <h4 class="card-title"><%= result.first_name%> <%= result.last_name%></h4>
+        <p class="card-text"></p>
         <%= link_to "Go to User Profile", user_path(result.id), class:"btn btn-primary" %>
       </div>
+    </div>
     <% end %>
   <% end %>
   <!-- <%= @results.inspect %> -->

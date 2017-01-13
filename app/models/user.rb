@@ -15,4 +15,5 @@ class User < ApplicationRecord
 
   after_validation :geocode, if: ->(obj){ obj.current_location.present? and obj.current_location_changed? }
 
+ mount_uploader :image, ImageUploader
 end
