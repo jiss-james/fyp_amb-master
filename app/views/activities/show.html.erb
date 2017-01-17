@@ -1,52 +1,48 @@
 <div class="container">
-<p id="notice"><%= notice %></p>
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Activity name:</strong>
-  <%= @activity.activity_name %>
-</p>
+  <div class="row">
+    <div class="col-4">
+      <h1><%= @activity.activity_name %></h1>
+      <br/>
+      <strong>Mobile No:</strong> <%= @activity.mobile %>
+      <br/>
+      <br/>
+      <strong>Telephone No:</strong> <%= @activity.telephone %>
+      <br/>
+      <br/>
+    </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @activity.description %>
-</p>
+    <div class="col-8">
+      <strong>Description:</strong> <%= @activity.description %>
+      <br/>
+      <br/>
+      <strong>Start Date:</strong> <%= @activity.start_date %>
+      <br/>
+      <br/>
+      <strong>End Date:</strong> <%= @activity.end_date %>
+      <br/>
+      <br/>
+      <strong>Address:</strong> <%= @activity.location %>
+      (Latitude: <%= @activity.latitude %> Longitude: <%= @activity.longitude%>)
+      <br/>
+      <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@activity.latitude},#{@activity.longitude}&markers=#{@activity.latitude},#{@activity.longitude}&zoom=15&size=640x400&key=AIzaSyBNjdwrpQ8D6O542G7gyNngdexq77DvVS8",
+                    class: 'img-fluid img-rounded', alt: "#{@activity.location} on the map"%>
+      <br/>
+      <br/>
+      <% if can? :update, @activity %>
+      <%= link_to 'Edit', edit_company_activity_path(@company, @activity), class: "btn btn-outline-primary" %>
+      |
+      <% end %>
+      <% if can? :destroy, @activity %>
+      <%= link_to "Delete", company_activity_path(@company, @activity), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-outline-danger" %>
+      |
+      <% end %>
+      <%= link_to 'Back', company_activities_path(@company), class: "btn btn-secondary" %>
+      <br/>
+      <br/>
 
-<p>
-  <strong>Start date:</strong>
-  <%= @activity.start_date %>
-</p>
-
-<p>
-  <strong>End date:</strong>
-  <%= @activity.end_date %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @activity.location %>
-</p>
-
-<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@activity.latitude},#{@activity.longitude}&markers=#{@activity.latitude},#{@activity.longitude}&zoom=15&size=640x400&key=AIzaSyBNjdwrpQ8D6O542G7gyNngdexq77DvVS8",
-              class: 'img-fluid img-rounded', alt: "#{@activity.location} on the map"%>
-
-<p>
-  <strong>Vehicle:</strong>
-  <%= @activity.vehicle %>
-</p>
-
-<p>
-  <strong>Mobile:</strong>
-  <%= @activity.mobile %>
-</p>
-
-<p>
-  <strong>Telephone:</strong>
-  <%= @activity.telephone %>
-</p>
-
-<%= link_to 'Edit', edit_company_activity_path(@company, @activity), class:"btn btn-primary" %> |
-<%= link_to 'Back', company_activities_path(@company), class:"btn btn-default" %> |
-<%= link_to "Delete", company_activity_path(@company, @activity), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger" %></p>
-
+    </div>
+  </div>
 
 </div>

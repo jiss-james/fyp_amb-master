@@ -2,28 +2,25 @@
 
 <div class="container">
 
-
-  <% if can? :create, Company %>
-  <%= link_to 'New Company', new_company_path, class:"btn btn-default" %>
-  <%end%>
-
   <h1>Your Organisation(s)</h1>
   <br/>
 
+  <% if can? :create, Company %>
+  <%= link_to 'New Company', new_company_path, class:"btn btn-secondary" %>
+  <%end%>
+  <br/>
+  <br/>
+
   <div class="row">
-  <% @companies.each do |company| %>
-    <div class="col-md-6">
-      <div class="card">
-        <img alt="Card image cap" class="card-img-top" src="..."/>
-        <div class="card-block">
-          <h4 class="card-title">
-            <%= company.company_name %>
-          </h4>
-          <% # %p.card-text= company.description %>
-          <%= link_to 'Show', company, class: "btn btn-primary" %>
-        </div>
-      </div>
+  <% current_user.companies.each do |company| %>
+  <div class="card" style="width: 20rem;">
+    <%= image_tag company.image_url(:med), class:"card-img-top" %>
+    <div class="card-block">
+      <h4 class="card-title"><%= company.company_name%></h4>
+      <p class="card-text"><%= company.location%></p>
+      <%= link_to 'Show', company, class: "btn btn-outline-primary" %>
     </div>
+  </div>
   <% end %>
 </div>
 

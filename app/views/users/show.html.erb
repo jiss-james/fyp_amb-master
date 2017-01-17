@@ -1,37 +1,48 @@
 <div class="container">
 
-  <%= image_tag(@user.image_url(:med)) if @user.image? %>
+  <div class="row">
+    <div class="col-4">
+      <%= image_tag(@user.image_url(:med)) if @user.image? %>
 
-<!-- <%= image_tag(@user.image_url)  %> -->
+      <h1><%= @user.first_name %> <%= @user.last_name %></h1>
 
-  <h1><%= @user.first_name %> <%= @user.last_name %></h1>
+      <strong>Date of Birth:</strong> <%= @user.date_of_birth.strftime("%B %d, %Y") %>
+      <br/>
+      <% if @user.gender? %>
+      <strong>Gender:</strong> <%= @user.gender.capitalize %>
+      <br/>
+      <br/>
+      <%end%>
+      <%= link_to 'Send a Message', new_conversation_path(:receiver_id => @user.id), class:"btn btn-outline-success" %>
+    </div>
+    <div class="col-8">
+      <strong>Profession:</strong> <%= @user.profession %>
+      <br/>
+      <br/>
+      <strong>Description:</strong> <%= @user.description %>
+      <br/>
+      <br/>
+      <strong>Work Experience:</strong> <%= @user.work_experience %>
+      <br/>
+      <br/>
+      <% if @user.current_location? %>
+      <strong>Address:</strong> <%= @user.current_location %>
+      (Latitude: <%= @user.latitude %> Longitude: <%= @user.longitude%>)
+      <br/>
+      <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@user.latitude},#{@user.longitude}&markers=#{@user.latitude},#{@user.longitude}&zoom=15&size=640x400&key=AIzaSyBNjdwrpQ8D6O542G7gyNngdexq77DvVS8",
+                    class: 'img-fluid img-rounded', alt: "#{@user.current_location} on the map"%>
 
-  Date of Birth: <%= @user.date_of_birth.strftime("%B %d, %Y") %>
-  <br/>
-  <br/>
-  Gender: <%= @user.gender %>
-  <br/>
-  <br/>
-  Profession: <%= @user.profession %>
-  <br/>
-  <br/>
-  Description: <%= @user.description %>
-  <br/>
-  <br/>
-  Work Experience: <%= @user.work_experience %>
-  <br/>
-  <br/>
-  Address: <%= @user.current_location %>
-  (Latitude: <%= @user.latitude %> Longitude: <%= @user.longitude%>)
-  <br/>
-  <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@user.latitude},#{@user.longitude}&markers=#{@user.latitude},#{@user.longitude}&zoom=15&size=640x400&key=AIzaSyBNjdwrpQ8D6O542G7gyNngdexq77DvVS8",
-                class: 'img-fluid img-rounded', alt: "#{@user.current_location} on the map"%>
+      <br/>
+      <br/>
+      <%end%>
 
-  <br/>
-  <br/>
-  <% if can? :update, User %>
-  <%= link_to 'Edit Profile', edit_user_registration_path, class:"btn btn-primary" %>
-  <%end%>
+      <% if can? :update, User %>
+      <%= link_to 'Edit Profile', edit_user_registration_path, class:"btn btn-outline-primary" %>
+      <%end%>
+
+    </div>
+  </div>
+
 
 
 </div>

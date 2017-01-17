@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     resources :activities
   end
 
+  resources :conversations do
+    resources :messages
+ end
+
   root to: "home#index"
 
   get 'page/about'

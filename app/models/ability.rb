@@ -8,8 +8,9 @@ class Ability
     if user.nil?
       # guest user
     else
-      can :create, [Company,Activity]
+      can :create, [Company,Activity,Conversation,Message]
       can :manage, User,  :user_id => user.id
+      can :manage, Conversation,  :user_id => user.id
       can [:manage], Company do |company|
            company.try(:user) == user
        end

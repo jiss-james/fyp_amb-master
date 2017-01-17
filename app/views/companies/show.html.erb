@@ -1,52 +1,45 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
-
-  <p>
-    <strong>Company name:</strong>
-    <%= @company.company_name %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= @company.description %>
-  </p>
-
-  <p>
-    <strong>Location:</strong>
-    <%= @company.location %>
-  </p>
-
-  <% if can? :update, @company %>
-  <%= link_to 'Edit', edit_company_path(@company), class: "btn btn-primary" %>
-  <% end %>
-  |
-  <%= link_to 'Back', companies_path, class: "btn btn-default" %>
-  <br/>
-  <br/>
-
-  <% if can? :create, Activity %>
-  <%= link_to "New Activity", new_company_activity_path(@company), class: "btn btn-success" %>
-  <br/>
-  <% end %>
-
-  <h3>All related activities:</h3>
-
   <div class="row">
-  <% @company.activities.each do |activity| %>
-    <div class="col-md-6">
-      <div class="card">
-        <img alt="Card image cap" class="card-img-top" src="..."/>
-        <div class="card-block">
-          <h4 class="card-title">
-            <%= activity.activity_name %>
-          </h4>
-          <% # %p.card-text= company.description %>
-          <%= link_to 'Show', company_activity_path(@company, activity), class: "btn btn-primary" %>
-        </div>
+    <div class="col-4">
+      <%= image_tag(@company.image_url(:med)) if @company.image? %>
+      <h1><%= @company.company_name %></h1>
+      <br/>
+
+      <h4>All related Activites:</h4>
+      <div class="list-group">
+        <% if can? :create, Activity %>
+        <a href="/companies/<%= @company.id %>/activities/new" class="list-group-item active">
+          Create New Activity
+        </a>
+        <% end %>
+        <% @company.activities.each do |activity| %>
+        <a href="/companies/<%= @company.id %>/activities/<%= activity.id %>" class="list-group-item list-group-item-action"><%= activity.activity_name%></a>
+        <% end %>
       </div>
     </div>
-  <% end %>
- </div>
+
+    <div class="col-8">
+      <strong>Description:</strong> <%= @company.description %>
+      <br/>
+      <br/>
+      <strong>Address:</strong> <%= @company.location %>
+      (Latitude: <%= @company.latitude %> Longitude: <%= @company.longitude%>)
+      <br/>
+      <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@company.latitude},#{@company.longitude}&markers=#{@company.latitude},#{@company.longitude}&zoom=15&size=640x400&key=AIzaSyBNjdwrpQ8D6O542G7gyNngdexq77DvVS8",
+                    class: 'img-fluid img-rounded', alt: "#{@company.location} on the map"%>
+      <br/>
+      <br/>
+      <% if can? :update, @company %>
+      <%= link_to 'Edit', edit_company_path(@company), class: "btn btn-outline-primary" %>
+      |
+      <% end %>
+      <%= link_to 'Back', companies_path, class: "btn btn-secondary" %>
+      <br/>
+      <br/>
+
+    </div>
+  </div>
 
 </div>

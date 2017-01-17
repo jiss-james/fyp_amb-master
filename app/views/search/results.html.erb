@@ -23,11 +23,13 @@
       </div>
     <% elsif result.class.to_s == "User" %>
     <div class="card" style="width: 20rem;">
-      <%= image_tag result.image_url(:thumb), class:"card-img-top" %>
+      <% if result.image? %>
+      <%= image_tag result.image_url(:med), class:"card-img-top" %>
+      <% end %>
       <div class="card-block">
         <h4 class="card-title"><%= result.first_name%> <%= result.last_name%></h4>
-        <p class="card-text"></p>
-        <%= link_to "Go to User Profile", user_path(result.id), class:"btn btn-primary" %>
+        <p class="card-text"><%= result.description%></p>
+        <%= link_to "Go to User Profile", user_path(result.id), class:"btn btn-outline-primary" %>
       </div>
     </div>
     <% end %>
