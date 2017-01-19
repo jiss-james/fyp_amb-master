@@ -5,8 +5,6 @@ class Conversation < ApplicationRecord
   has_many :messages, dependent: :destroy
   belongs_to :user
 
-  attr_accessor :receiver_id
-
   after_create :add_user_to_conversation
 
   private

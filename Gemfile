@@ -56,6 +56,7 @@ gem 'cancancan'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 
 gem 'geocoder'
+gem 'gmaps4rails'
 
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"

@@ -17,7 +17,7 @@ class ConversationsController < ApplicationController
   end
 
   def create
-    @conversation = Conversation.new(conversation_params)
+    @conversation = current_user.conversations.build(conversation_params)
     @conversation.user = current_user
     @conversation.receiver_id = params[:receiver_id]
 
