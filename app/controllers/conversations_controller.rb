@@ -19,7 +19,7 @@ class ConversationsController < ApplicationController
   def create
     @conversation = current_user.conversations.build(conversation_params)
     @conversation.user = current_user
-    @conversation.receiver_id = params[:receiver_id]
+    # @conversation.receiver_id = params[:receiver_id]
 
     respond_to do |format|
       if @conversation.save

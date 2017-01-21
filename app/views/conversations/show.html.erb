@@ -2,15 +2,34 @@
 
 <div class="container">
 
-  <p>
-    <strong>Conversation Subject:</strong>
-    <%= @conversation.subject %>
-  </p>
-
+  <ul class="list-group">
+    <li class="list-group-item active">
+      Subject: <%= @conversation.subject %>
+    </li>
   <% @conversation.messages.each do |message| %>
-    <p><%= message.message%></p>
+    <%if message.user_id == current_user.id && message.message?%>
+    <li class="list-group-item flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1"><%= User.find(message.user_id).first_name %>:</h5>
+        <small class="text-muted"><%= message.created_at%></small>
+      </div>
+      <p class="mb-1"><%= message.message%></p>
+    </li>
+   <%end%>
+   <%if message.user_id != current_user.id && message.message? %>
+   <li class="list-group-item list-group-item-success flex-column align-items-start">
+     <div class="d-flex w-100 justify-content-between">
+       <h5 class="mb-1"><%= User.find(message.user_id).first_name %>:</h5>
+       <small class="text-muted"><%= message.created_at%></small>
+     </div>
+     <p class="mb-1"><%= message.message%></p>
+   </li>
+   <%end%>
   <% end %>
+  </ul>
 
+  <br/>
+  <br/>
   <%= form_for @message, url: conversation_messages_path(@conversation), method: :post do |f| %>
     <% if @message.errors.any? %>
       <div id="error_explanation">

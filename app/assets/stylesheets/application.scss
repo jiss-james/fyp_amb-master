@@ -17,3 +17,13 @@
  // @import "bootstrap-sprockets";
  @import "bootstrap";
  @import "font-awesome";
+
+ .navbar-nav > li{
+   padding-left:0.5px;
+   padding-right:0.5px;
+ }
+
+ .navbar > a{
+   padding-left:0.5px;
+   padding-right:0.5px;
+ }

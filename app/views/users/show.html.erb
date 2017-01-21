@@ -18,6 +18,10 @@
       <br/>
       <%end%>
       <%= link_to 'Send a Message', new_conversation_path(:receiver_id => @user.id), class:"btn btn-outline-success" %>
+      <% if can? :update, User %>
+      <%= link_to 'Edit Profile', edit_user_registration_path, class:"btn btn-outline-primary" %>
+      <%end%>
+
     </div>
     <div class="col-8">
       <strong>Profession:</strong> <%= @user.profession %>
@@ -31,34 +35,29 @@
       <br/>
       <% if @user.current_location? %>
       <strong>Address:</strong> <%= @user.current_location %>
-      (Latitude: <%= @user.latitude %> Longitude: <%= @user.longitude%>)
       <br/>
 
       <div style='width: 800px;'>
-        <div id="map" style='width: 800px; height: 400px;'></div>
+        <div id="map" style='width: 650px; height: 400px;'>
+          <script type="text/javascript">
+            handler = Gmaps.build('Google');
+            handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+            markers = handler.addMarkers(<%=raw @hash.to_json %>);
+            handler.bounds.extendWith(markers);
+            handler.fitMapToBounds();
+            });
+            google.maps.event.addDomListener(window, 'page:load', initialize);
+          </script>
+        </div>
       </div>
 
-        <!-- <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@user.latitude},#{@user.longitude}&markers=#{@user.latitude},#{@user.longitude}&zoom=15&size=640x400&key=AIzaSyBNjdwrpQ8D6O542G7gyNngdexq77DvVS8",
-                      class: 'img-fluid img-rounded', alt: "#{@user.current_location} on the map"%> -->
-
-      <script type="text/javascript">
-        handler = Gmaps.build('Google');
-        handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-        markers = handler.addMarkers(<%=raw @hash.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-        });
-      </script>
-
       <br/>
       <br/>
-      <%end%>
-
-      <% if can? :update, User %>
-      <%= link_to 'Edit Profile', edit_user_registration_path, class:"btn btn-outline-primary" %>
       <%end%>
 
     </div>
+
+
   </div>
 
 
