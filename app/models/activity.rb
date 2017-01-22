@@ -7,4 +7,5 @@ class Activity < ApplicationRecord
 
     after_validation :geocode, if: ->(obj){ obj.location.present? and obj.location_changed? }
 
+    mount_uploader :image, ImageUploader
 end

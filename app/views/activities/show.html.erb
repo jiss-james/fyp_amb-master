@@ -3,6 +3,7 @@
 
   <div class="row">
     <div class="col-4">
+      <%= image_tag(@activity.image_url(:med)) if @activity.image? %>
       <h1><%= @activity.activity_name %></h1>
       <br/>
       <strong>Mobile No:</strong> <%= @activity.mobile %>
