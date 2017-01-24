@@ -9,4 +9,9 @@ class Company < ApplicationRecord
   after_validation :geocode, if: ->(obj){ obj.location.present? and obj.location_changed? }
 
   mount_uploader :image, ImageUploader
+
+  validates :company_name, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: "Only allows letters" }
+  validates :description, presence: true
+  validates :location, presence: true
+
 end

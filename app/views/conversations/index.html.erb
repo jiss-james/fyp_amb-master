@@ -4,9 +4,12 @@
 
   <div class="row">
     <% current_user.conversations.each do |conversation| %>
+    <% @user = User.find(conversation.user_id)
+       @receiver = User.find(conversation.receiver_id) %>
     <div class="card" style="width: 20rem;">
       <div class="card-block">
         <h4 class="card-title"><%= conversation.subject%></h4>
+        <p class="card-text">Members: <%= @user.first_name %>, <%= @receiver.first_name %></p>
         <%= link_to 'Show', conversation, class: "btn btn-outline-warning" %>
       </div>
     </div>

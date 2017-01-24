@@ -4,10 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  validates :first_name, :last_name, presence: true
-
-  enum gender: [ :male, :female ]
-
   has_many :companies, dependent: :destroy
   has_many :user_conversations, dependent: :destroy
   has_many :conversations, through: :user_conversations
@@ -18,4 +14,10 @@ class User < ApplicationRecord
   after_validation :geocode, if: ->(obj){ obj.current_location.present? and obj.current_location_changed? }
 
   mount_uploader :image, ImageUploader
+
+  enum gender: [ :male, :female ]
+
+  validates :first_name, :last_name, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: "Only allows letters" }
+  validates :gender, presence: true
+
 end

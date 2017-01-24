@@ -8,27 +8,41 @@
 
       <strong>Date of Birth:</strong> <%= @user.date_of_birth.strftime("%B %d, %Y") %>
       <br/>
-      <% if @user.gender? %>
       <strong>Gender:</strong> <%= @user.gender.capitalize %>
       <br/>
+      <% if @user.mobile? %>
+      <strong>Mobile:</strong> <%= @user.mobile %>
       <br/>
       <%end%>
+      <% if @user.telephone? %>
+      <strong>Telephone:</strong> <%= @user.telephone %>
+      <br/>
+      <%end%>
+      <br/>
+      <% unless @user.id == current_user.id %>
       <%= link_to 'Send a Message', new_conversation_path(:receiver_id => @user.id), class:"btn btn-outline-success" %>
-      <% if can? :update, User %>
+      <%end%>
+      <% if @user.id == current_user.id %>
       <%= link_to 'Edit Profile', edit_user_registration_path, class:"btn btn-outline-primary" %>
       <%end%>
 
     </div>
     <div class="col-8">
+      <% if @user.profession? %>
       <strong>Profession:</strong> <%= @user.profession %>
       <br/>
       <br/>
+      <%end%>
+      <% if @user.description? %>
       <strong>Description:</strong> <%= @user.description %>
       <br/>
       <br/>
+      <%end%>
+      <% if @user.work_experience? %>
       <strong>Work Experience:</strong> <%= @user.work_experience %>
       <br/>
       <br/>
+      <%end%>
       <% if @user.current_location? %>
       <strong>Address:</strong> <%= @user.current_location %>
       <br/>

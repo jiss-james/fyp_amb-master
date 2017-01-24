@@ -6,12 +6,16 @@
       <%= image_tag(@activity.image_url(:med)) if @activity.image? %>
       <h1><%= @activity.activity_name %></h1>
       <br/>
+      <% if @activity.mobile? %>
       <strong>Mobile No:</strong> <%= @activity.mobile %>
       <br/>
       <br/>
+      <%end%>
+      <% if @activity.telephone? %>
       <strong>Telephone No:</strong> <%= @activity.telephone %>
+      <%end%>
       <br/>
-      <br/>
+      <%= link_to 'Message Owner', new_conversation_path(:receiver_id => @user.id), class:"btn btn-outline-success" %>
     </div>
 
     <div class="col-8">
@@ -24,12 +28,18 @@
       <strong>End Date:</strong> <%= @activity.end_date %>
       <br/>
       <br/>
+      <% if @activity.location? %>
       <strong>Address:</strong> <%= @activity.location %>
       (Latitude: <%= @activity.latitude %> Longitude: <%= @activity.longitude%>)
       <br/>
-      <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@activity.latitude},#{@activity.longitude}&markers=#{@activity.latitude},#{@activity.longitude}&zoom=15&size=640x400&key=AIzaSyBNjdwrpQ8D6O542G7gyNngdexq77DvVS8",
-                    class: 'img-fluid img-rounded', alt: "#{@activity.location} on the map"%>
-      <br/>
+      <div id="mapouter">
+        <div id="gmap_canvas">
+          <iframe width="600" height="500" frameborder="0" scrolling="no" marginheight="0" src="https://maps.google.com/maps?q=<%= @activity.location %>, IE, &t=&z=17&ie=UTF8&iwloc=&output=embed" marginwidth="0"></iframe>
+          <a class="addmaps"href="http://www.map-embed.com/wordpress-themes/"id="get-map-data">Cork, IE, </a>
+        </div>
+        <style>#gmap_canvas{height:500px;width:600px;}#mapouter{overflow:hidden;height:500px;width:600px;}</style>
+      </div>
+      <%end%>
       <br/>
       <% if can? :update, @activity %>
       <%= link_to 'Edit', edit_company_activity_path(@company, @activity), class: "btn btn-outline-primary" %>
