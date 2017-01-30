@@ -15,7 +15,12 @@
       <strong>Telephone No:</strong> <%= @activity.telephone %>
       <%end%>
       <br/>
+      <% if @user.id == current_user.id %>
+      <%= link_to 'Find Help Nearby', search_path(:q => @activity.location, :category => "ulocation"), class:"btn btn-outline-warning" %>
+      <%end%>
+      <% unless @user.id == current_user.id %>
       <%= link_to 'Message Owner', new_conversation_path(:receiver_id => @user.id), class:"btn btn-outline-success" %>
+      <%end%>
     </div>
 
     <div class="col-8">

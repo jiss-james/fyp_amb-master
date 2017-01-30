@@ -1,7 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
-
   <h1>Your Organisation(s)</h1>
   <br/>
 
@@ -13,7 +12,7 @@
 
   <div class="row">
   <% current_user.companies.each do |company| %>
-  <div class="card" style="width: 20rem;">
+  <div class="card" style="width: 17rem; height: 23rem;">
     <%= image_tag company.image_url(:med), class:"card-img-top" %>
     <div class="card-block">
       <h4 class="card-title"><%= company.company_name%></h4>
@@ -24,7 +23,5 @@
   <% end %>
 </div>
 
-
   <br>
-
 </div>

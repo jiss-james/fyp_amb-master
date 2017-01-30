@@ -9,7 +9,7 @@ class Activity < ApplicationRecord
 
     mount_uploader :image, ImageUploader
 
-    validates :activity_name, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: "Only allows letters" }
+    validates :activity_name, presence: true
     validates :description, presence: true
     validates :start_date, presence: true
     validates :end_date, presence: true

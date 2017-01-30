@@ -6,6 +6,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
   </head>
 
   <body>
@@ -59,7 +60,6 @@
               <%= link_to('Sign Out', destroy_user_session_path, :method => :delete, class:"nav-link") %>
             </div>
           </li>
-
           <% end %>
 
           <% unless user_signed_in? %>
@@ -85,7 +85,7 @@
         <strong>Brilliant !</strong> <%= notice %>
     </div>
     <%end%>
-    <!-- <p class="notice"><%= notice %></p> -->
+
     <% if alert != nil %>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -94,8 +94,6 @@
         <strong>Oh snap!</strong> <%= alert %>
     </div>
     <%end%>
-
-
 
   </body>
 </html>

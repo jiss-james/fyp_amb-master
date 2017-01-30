@@ -1,7 +1,7 @@
 <div class="container">
   <% @results.each do |result| %>
     <% if result.class.to_s == "Company" %>
-    <div class="card" style="width: 20rem;">
+    <div class="card" style="width: 17rem;">
       <% if result.image? %>
       <%= image_tag result.image_url(:med), class:"card-img-top" %>
       <% end %>
@@ -16,7 +16,7 @@
       </div>
     </div>
     <% elsif result.class.to_s == "Activity" %>
-    <div class="card" style="width: 20rem;">
+    <div class="card" style="width: 17rem;">
       <% if result.image? %>
       <%= image_tag result.image_url(:med), class:"card-img-top" %>
       <% end %>
@@ -31,7 +31,7 @@
       </div>
     </div>
     <% elsif result.class.to_s == "User" %>
-    <div class="card" style="width: 20rem;">
+    <div class="card" style="width: 17rem;">
       <% if result.image? %>
       <%= image_tag result.image_url(:med), class:"card-img-top" %>
       <% end %>
@@ -43,5 +43,5 @@
     </div>
     <% end %>
   <% end %>
-  <!-- <%= @results.inspect %> -->
+
 </div>

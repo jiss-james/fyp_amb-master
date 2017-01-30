@@ -36,7 +36,6 @@
       </div>
       <%end%>
       <br/>
-      <br/>
       <% if can? :update, @company %>
       <%= link_to 'Edit', edit_company_path(@company), class: "btn btn-outline-primary" %>
       |
@@ -46,8 +45,6 @@
       |
       <% end %>
       <%= link_to 'Back', companies_path, class: "btn btn-secondary" %>
-      <br/>
-      <br/>
 
     </div>
   </div>
