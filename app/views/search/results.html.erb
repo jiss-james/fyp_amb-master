@@ -1,47 +1,60 @@
 <div class="container">
-  <% @results.each do |result| %>
-    <% if result.class.to_s == "Company" %>
-    <div class="card" style="width: 17rem;">
-      <% if result.image? %>
-      <%= image_tag result.image_url(:med), class:"card-img-top" %>
+  <h3>Results for <%= @genre %> named <%= @q %>:</h3>
+  <br/>
+
+  <div class="row">
+    <div class="card-deck">
+      <% @results.each do |result| %>
+        <% if result.class.to_s == "Company" %>
+        <div class="card text-center" style="width: 17rem;">
+          <% if result.image? %>
+          <%= image_tag result.image_url(:med), class:"card-img-top" %>
+          <% end %>
+          <div class="card-block">
+            <h4 class="card-title">
+              <%= result.company_name %>
+            </h4>
+            <p class="card-text">
+              <%= result.location %>
+            </p>
+          </div>
+          <div class="card-footer">
+            <%= link_to "Go to Company", company_path(result.id), class:"btn btn-outline-primary" %>
+          </div>
+        </div>
+        <% elsif result.class.to_s == "Activity" %>
+        <div class="card text-center" style="width: 17rem;">
+          <% if result.image? %>
+          <%= image_tag result.image_url(:med), class:"card-img-top" %>
+          <% end %>
+          <div class="card-block">
+            <h4 class="card-title">
+              <%= result.activity_name %>
+            </h4>
+            <p class="card-text">
+              <%= result.location %>
+            </p>
+          </div>
+          <div class="card-footer">
+            <%= link_to "Go to Activity", company_activity_path(result.company_id, result.id), class:"btn btn-outline-primary" %>
+          </div>
+        </div>
+        <% elsif result.class.to_s == "User" %>
+        <div class="card text-center" style="width: 17rem;">
+          <% if result.image? %>
+          <%= image_tag result.image_url(:med), class:"card-img-top" %>
+          <% end %>
+          <div class="card-block">
+            <h4 class="card-title"><%= result.first_name%> <%= result.last_name%></h4>
+            <p class="card-text"><%= result.current_location%></p>
+          </div>
+          <div class="card-footer">
+            <%= link_to "Go to User Profile", user_path(result.id), class:"btn btn-outline-primary" %>
+          </div>
+        </div>
+        <% end %>
       <% end %>
-      <div class="card-block">
-        <h4 class="card-title">
-          <%= result.company_name %>
-        </h4>
-        <p class="card-text">
-          <%= result.location %>
-        </p>
-        <%= link_to "Go to Company", company_path(result.id), class:"btn btn-outline-primary" %>
-      </div>
     </div>
-    <% elsif result.class.to_s == "Activity" %>
-    <div class="card" style="width: 17rem;">
-      <% if result.image? %>
-      <%= image_tag result.image_url(:med), class:"card-img-top" %>
-      <% end %>
-      <div class="card-block">
-        <h4 class="card-title">
-          <%= result.activity_name %>
-        </h4>
-        <p class="card-text">
-          <%= result.location %>
-        </p>
-        <%= link_to "Go to Activity", company_activity_path(result.company_id, result.id), class:"btn btn-outline-primary" %>
-      </div>
-    </div>
-    <% elsif result.class.to_s == "User" %>
-    <div class="card" style="width: 17rem;">
-      <% if result.image? %>
-      <%= image_tag result.image_url(:med), class:"card-img-top" %>
-      <% end %>
-      <div class="card-block">
-        <h4 class="card-title"><%= result.first_name%> <%= result.last_name%></h4>
-        <p class="card-text"><%= result.current_location%></p>
-        <%= link_to "Go to User Profile", user_path(result.id), class:"btn btn-outline-primary" %>
-      </div>
-    </div>
-    <% end %>
-  <% end %>
+  </div>
 
 </div>

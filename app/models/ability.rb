@@ -7,6 +7,8 @@ class Ability
     can :read, :all
     if user.nil?
       # guest user
+    elsif user.admin?
+      can :manage, :all
     else
       can :create, [Company,Activity,Conversation,Message]
       can :manage, User,  :user_id => user.id

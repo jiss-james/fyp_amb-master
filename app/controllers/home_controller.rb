@@ -4,10 +4,11 @@ class HomeController < ApplicationController
 
   def index
 
-    @location = Geocoder.search('95.44.76.199').first.city # => "Saint Petersburg"  
-    @results = Activity.near("95.44.76.199", 50)
-    # @activities = Activity.near(@location, 50)
-    # @results = @users + @activities
+    # 143.239.9.27
+    @location = Geocoder.search('143.239.9.24').first.city # => "Cork"
+    @companies = Company.near(@location, 50)
+    @activities = Activity.near(@location, 50)
+    # @results = @activities + @companies
 
   end
 

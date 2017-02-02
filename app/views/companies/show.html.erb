@@ -1,4 +1,11 @@
-<p id="notice"><%= notice %></p>
+<% if notice != nil %>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+    <strong>Brilliant !</strong> <%= notice %>
+</div>
+<%end%>
 
 <div class="container">
   <div class="row">
@@ -9,8 +16,8 @@
 
       <h4>All related Activites:</h4>
       <div class="list-group">
-        <% if can? :create, Activity %>
-        <a href="/companies/<%= @company.id %>/activities/new" class="list-group-item active">
+        <% if can? :manage, @company %>
+        <a href="/companies/<%= @company.id %>/activities/new" class="list-group-item list-group-item-action list-group-item-success">
           Create New Activity
         </a>
         <% end %>

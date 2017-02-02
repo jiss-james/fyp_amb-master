@@ -1,22 +1,62 @@
 <div class="container">
-  <h3>All Activities around you..</p>
-  <% @results.each do |result| %>
-    <% if result.class.to_s == "Activity" %>
-    <div class="card" style="width: 17rem;">
-      <% if result.image? %>
-      <%= image_tag result.image_url(:med), class:"card-img-top" %>
-      <% end %>
-      <div class="card-block">
-        <h4 class="card-title">
-          <%= result.activity_name %>
-        </h4>
-        <p class="card-text">
-          <%= result.location %>
-        </p>
-        <%= link_to "Go to Activity", company_activity_path(result.company_id, result.id), class:"btn btn-outline-primary" %>
+
+  <% if !@activities.nil? %>
+    <h3>All Activities around <%= @location%>:</h3>
+    <br/>
+    <div class="row">
+      <div class="card-deck">
+        <% @activities.each do |activity| %>
+          <div class="card text-center" style="width: 17rem;">
+            <% if activity.image? %>
+            <%= image_tag activity.image_url(:med), class:"card-img-top" %>
+            <% end %>
+            <div class="card-block">
+              <h4 class="card-title">
+                <%= activity.activity_name %>
+              </h4>
+              <p class="card-text">
+                <%= activity.location %>
+              </p>
+            </div>
+            <div class="card-footer">
+              <%= link_to "Go to Activity", company_activity_path(activity.company_id, activity.id), class:"btn btn-outline-primary" %>
+            </div>
+          </div>
+        <%end%>
       </div>
     </div>
-    <%end%>
-  <% end %>
+    <br/>
+  <%end%>
+
+  <% if !@companies.nil? %>
+    <h3>All Companies around <%= @location%>:</h3>
+    <br/>
+    <div class="row">
+      <div class="card-deck">
+        <% @companies.each do |company| %>
+          <div class="card text-center" style="width: 17rem;">
+            <% if company.image? %>
+            <%= image_tag company.image_url(:med), class:"card-img-top" %>
+            <% end %>
+            <div class="card-block">
+              <h4 class="card-title">
+                <%= company.company_name %>
+              </h4>
+              <p class="card-text">
+                <%= company.location %>
+              </p>
+            </div>
+            <div class="card-footer">
+              <%= link_to "Go to Company", company_path(company.id), class:"btn btn-outline-primary" %>
+            </div>
+        </div>
+        <%end%>
+      </div>
+    </div>
+  <%end%>
+
+
+
+
 
 </div>

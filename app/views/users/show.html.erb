@@ -8,8 +8,10 @@
 
       <strong>Date of Birth:</strong> <%= @user.date_of_birth.strftime("%B %d, %Y") %>
       <br/>
+      <% if @user.gender? %>
       <strong>Gender:</strong> <%= @user.gender.capitalize %>
       <br/>
+      <%end%>
       <% if @user.mobile? %>
       <strong>Mobile:</strong> <%= @user.mobile %>
       <br/>
@@ -22,7 +24,7 @@
       <% unless @user.id == current_user.id %>
       <%= link_to 'Send a Message', new_conversation_path(:receiver_id => @user.id), class:"btn btn-outline-success" %>
       <%end%>
-      <% if @user.id == current_user.id %>
+      <% if @user.id == current_user.id || current_user.admin? %>
       <%= link_to 'Edit Profile', edit_user_registration_path, class:"btn btn-outline-primary" %>
       <%end%>
 

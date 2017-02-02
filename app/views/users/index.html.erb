@@ -1,0 +1,26 @@
+<div class="container">
+
+<h3>All user accounts:</p>
+
+<div class="row">
+  <div class="card-deck">
+    <% @users.each do |user| %>
+      <div class="card text-center" style="width: 17rem;">
+        <% if user.image? %>
+        <%= image_tag user.image_url(:med), class:"card-img-top" %>
+        <% end %>
+        <div class="card-block">
+          <h4 class="card-title"><%= user.first_name%> <%= user.last_name%></h4>
+          <p class="card-text"><%= user.current_location%></p>
+        </div>
+        <div class="card-footer">
+          <%= link_to "Go to User Profile", user_path(user.id), class:"btn btn-outline-primary" %>
+        </div>
+      </div>
+
+      <br/>
+    <% end %>
+  </div>
+</div>
+
+</div>
