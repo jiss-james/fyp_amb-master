@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :companies, dependent: :destroy
   has_many :user_conversations, dependent: :destroy
-  has_many :conversations, through: :user_conversations
+  has_many :conversations, through: :user_conversations, dependent: :destroy
 
   geocoded_by :current_location
   after_validation :geocode
@@ -18,6 +18,5 @@ class User < ApplicationRecord
   enum gender: [ :male, :female ]
 
   validates :first_name, :last_name, presence: true, format: { with: /\A[a-zA-Z]+\z/, message: "Only allows letters" }
-  validates :gender, presence: true
 
 end

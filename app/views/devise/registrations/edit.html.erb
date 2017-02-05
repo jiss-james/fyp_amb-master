@@ -1,10 +1,7 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: :true}) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="container"
-    style="background: #F8F8FF;
-    padding: 15px;
-    box-shadow: 10px 10px 5px grey;">
+  <div class="container">
 
     <div class="form-group">
       <%= f.label :first_name %>

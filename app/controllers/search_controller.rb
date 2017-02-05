@@ -14,12 +14,19 @@ class SearchController < ApplicationController
       @users = User.near(@q, 50)
       @activities = Activity.near(@q, 50)
       @results = @users + @activities
+      @genre = "Location"
     elsif @category == "ulocation"
       @users = User.near(@q, 50)
       @results = @users
+      @genre = "Location"
     elsif @category == "alocation"
       @activities = Activity.near(@q, 50)
       @results = @activities
+      @genre = "Location"
+    elsif @category == "clocation"
+      @companies = Company.near(@q, 50)
+      @results = @companies
+      @genre = "Location"
     else
       @results = Company.where("company_name ILIKE ?", "%#{@q}%")
       @genre = "Company"

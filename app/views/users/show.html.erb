@@ -22,10 +22,14 @@
       <%end%>
       <br/>
       <% unless @user.id == current_user.id %>
-      <%= link_to 'Send a Message', new_conversation_path(:receiver_id => @user.id), class:"btn btn-outline-success" %>
+        <%= link_to 'Send a Message', new_conversation_path(:receiver_id => @user.id), class:"btn btn-outline-success" %>
+        <br/>
+        <br/>
       <%end%>
-      <% if @user.id == current_user.id || current_user.admin? %>
-      <%= link_to 'Edit Profile', edit_user_registration_path, class:"btn btn-outline-primary" %>
+      <% if @user.id == current_user.id %>
+        <%= link_to 'Edit Profile', edit_user_registration_path, class:"btn btn-outline-primary" %>
+        <% elsif current_user.admin? %>
+        <%= button_to "Cancel Account", user_path(@user), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger" %>
       <%end%>
 
     </div>
