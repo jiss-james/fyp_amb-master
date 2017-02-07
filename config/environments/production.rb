@@ -93,8 +93,8 @@ Rails.application.configure do
   domain: "fypamb.herokuapp.com",
   authentication: "plain",
   enable_starttls_auto: true,
-  user_name: ENV["fypmailer@gmail.com"],
-  password: ENV["08Mo1074"]
+  user_name: ENV["GMAIL_USERNAME"],
+  password: ENV["GMAIL_PASSWORD"]
   }
 
 end

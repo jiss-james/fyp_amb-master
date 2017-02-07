@@ -6,6 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+
 module FypAmb
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -17,5 +18,8 @@ module FypAmb
         ENV[key.to_s] = value
       end if File.exists?(env_file)
     end
+
+    config.paths['app/views'] << "app/views/devise"
+
   end
 end
