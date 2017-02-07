@@ -85,6 +85,8 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   #Mailing settings
+  config.action_mailer.perform_deliveries = true
+
   config.action_mailer.smtp_settings = {
   address: "smtp.gmail.com",
   port: 587,
@@ -92,7 +94,7 @@ Rails.application.configure do
   authentication: "plain",
   enable_starttls_auto: true,
   user_name: ENV["fypmailer@gmail.com"],
-  password: ENV["08Mo1431074"]
+  password: ENV["08Mo1074"]
   }
 
 end

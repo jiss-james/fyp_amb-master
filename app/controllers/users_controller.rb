@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :authenticate_user!
-  before_filter :check_if_admin
+  before_filter :check_if_admin, only: [:index, :destroy]
 
 
   def index
