@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
   load_and_authorize_resource
 
   # GET /companies

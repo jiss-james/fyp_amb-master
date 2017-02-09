@@ -1,117 +1,165 @@
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: :true}) do |f| %>
-  <%= devise_error_messages! %>
+<div class="container">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: :true}) do |f| %>
+    <%= devise_error_messages! %>
 
-  <div class="container">
-
-    <div class="form-group">
-      <%= f.label :first_name %>
-      <%= f.text_field :first_name, class:"form-control", placeholder:"First Name", autofocus: true %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :last_name %>
-      <%= f.text_field :last_name, class:"form-control", placeholder:"First Name" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :date_of_birth %>
+    <div class="card">
+      <h3 class="card-header">Sign Up</h3>
       <br/>
-      <%= f.date_select :date_of_birth, start_year: Date.today.year - 18, end_year: Date.today.year - 100 %>
-    </div>
 
-    <fieldset class="form-group">
-      <%= f.label :gender %>
-      <div class="field.radio">
-        <% User.genders.keys.each do |gender| %>
-          <%= f.radio_button :gender, gender %>
-          <%= f.label gender.to_sym %>
+      <div style="padding:20px">
+
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></div>
+            <%= f.text_field :first_name, class:"form-control", placeholder:"First Name", autofocus: true %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></div>
+            <%= f.text_field :last_name, class:"form-control", placeholder:"Last Name" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :date_of_birth %>
+          <br/>
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon"><i class="fa fa-child" aria-hidden="true"></i></div>
+            <%= f.date_select :date_of_birth, order: [:day, :month, :year],start_year: Date.today.year - 18, end_year: Date.today.year - 100 %>
+          </div>
+        </div>
+
+        <fieldset class="form-group">
+          <%= f.label :gender %>
+          <div class="field.radio">
+            <% User.genders.keys.each do |gender| %>
+              <%= f.radio_button :gender, gender %>
+              <%= f.label gender.to_sym %>
+            <% end %>
+          </div>
+        </fieldset>
+
+        <div class="form-group">
+          <%= f.label :image %>
+          <%= f.file_field :image %>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon"><i class="fa fa-file-text" aria-hidden="true"></i></div>
+            <%= f.text_area :description, class:"form-control", placeholder:"Personal Description", rows:"10" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></div>
+            <%= f.text_field :profession, class:"form-control", placeholder:"Work/Study" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>
+            <%= f.text_area :work_experience, class:"form-control", placeholder:"Work Experience", rows:"10" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+            <%= f.text_field :current_location, class:"form-control", placeholder:"Location" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon"><i class="fa fa-mobile" aria-hidden="true"></i></div>
+            <%= f.text_field :mobile, class:"form-control", placeholder:"Mobile Number" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></div>
+            <%= f.text_field :telephone, class:"form-control", placeholder:"Telephone Number" %>
+          </div>
+        </div>
+
+        <br/>
+        <div class="form-group">
+          <label class="custom-control custom-checkbox">
+            <span class="custom-control-description"><i class="fa fa-car" aria-hidden="true"></i> <%= f.label :vehicle %></span>
+            <%= f.check_box :vehicle, class:"custom-control-input" %>
+            <span class="custom-control-indicator"></span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="custom-control custom-checkbox">
+            <span class="custom-control-description"><i class="fa fa-handshake-o" aria-hidden="true"></i> <%= f.label :available_for_work %></span>
+            <%= f.check_box :available_for_work, class:"custom-control-input" %>
+            <span class="custom-control-indicator"></span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+            <%= f.email_field :email, class:"form-control", placeholder:"Email ID" %>
+          </div>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
-      </div>
-    </fieldset>
 
-    <div class="form-group">
-      <%= f.label :image %>
-      <%= f.file_field :image %>
+        <div class="form-group">
+          <%= f.label :password %> <i>(leave blank if you don't want to change it)</i>
+          <% if @minimum_password_length %>
+            <em><%= @minimum_password_length %> characters minimum</em>
+          <% end %>
+          <br />
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon"><i class="fa fa-unlock-alt" aria-hidden="true"></i></div>
+            <%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder:"New Password" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon"><i class="fa fa-unlock-alt" aria-hidden="true"></i></div>
+            <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", placeholder:"Confirm New Password" %>
+          </div>
+        </div>
+
+        <div class="form-group has-warning">
+          <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon"><i class="fa fa-unlock-alt" aria-hidden="true"></i></div>
+            <%= f.password_field :current_password, autocomplete: "on", class:"form-control", placeholder:"Current Password" %>
+          </div>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Update", class:"btn btn-success btn-block" %>
+        </div>
+
+      <%end%>
+
     </div>
 
-    <div class="form-group">
-      <%= f.label :description %>
-      <%= f.text_area :description, class:"form-control", placeholder:"Personal Description", rows:"10" %>
+    <div class="card-footer">
+      <h3>Delete my account</h3>
+      Unhappy with Us?<br/>
+      <br/>
+      <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger btn-block" %>
+      <br/>
+      <%= link_to "Back", :back, class:"btn btn-secondary btn-block" %>
     </div>
-
-    <div class="form-group">
-      <%= f.label :profession %>
-      <%= f.text_field :profession, class:"form-control", placeholder:"Work/Study" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :work_experience %>
-      <%= f.text_area :work_experience, class:"form-control", placeholder:"Work Experience", rows:"10" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :current_location %>
-      <%= f.text_field :current_location, class:"form-control", placeholder:"Location" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :mobile %>
-      <%= f.text_field :mobile, class:"form-control", placeholder:"Mobile Number" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :telephone %>
-      <%= f.text_field :telephone, class:"form-control", placeholder:"Telephone Number" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :vehicle %>
-      <%= f.check_box :vehicle %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :available_for_work %>
-      <%= f.check_box :available_for_work  %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, class:"form-control", placeholder:"Email" %>
-    </div>
-
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-    <% end %>
-
-    <div class="form-group">
-      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-      <%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder:"New Password" %>
-      <% if @minimum_password_length %>
-        <em><%= @minimum_password_length %> characters minimum</em>
-      <% end %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", placeholder:"Confirm New Password" %>
-    </div>
-
-    <div class="form-group has-warning">
-      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-      <%= f.password_field :current_password, autocomplete: "on", class:"form-control", placeholder:"Current Password" %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit "Update", class:"btn btn-success" %>
-    </div>
-
-<%end%>
-
-  <h3>Delete my account</h3>
-  Unhappy with Us?<br/>
-  <br/>
-  <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger" %>
-  <br/>
-  <%= link_to "Back", :back, class:"btn btn-secondary" %>
 
   </div>
+
+</div>
