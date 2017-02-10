@@ -12,26 +12,32 @@
     <% end %>
 
     <div class="form-group">
-      <%= f.label :company_name %>
-      <%= f.text_field :company_name, class:"form-control", placeholder:"Organisation Name", autofocus: true %>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+        <div class="input-group-addon"><i class="fa fa-building-o" aria-hidden="true"></i></div>
+        <%= f.text_field :company_name, class:"form-control", placeholder:"Organisation Name", autofocus: true %>
+      </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :description %>
-      <%= f.text_area :description, class:"form-control", placeholder:"Organisation Description", rows:"10" %>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+        <div class="input-group-addon"><i class="fa fa-file-text" aria-hidden="true"></i></div>
+        <%= f.text_area :description, class:"form-control", placeholder:"Organisation Description", rows:"10" %>
+      </div>
     </div>
 
   <div class="form-group">
-    <%= f.label :image %>
+    <i class="fa fa-picture-o" aria-hidden="true"></i>  <%= f.label :image %> -  
     <%= f.file_field :image %>
   </div>
 
     <div class="form-group">
-      <%= f.label :location %>
-      <%= f.text_field :location, class:"form-control", placeholder:"Company Location" %>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+        <div class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+        <%= f.text_field :location, class:"form-control", placeholder:"Company Location" %>
+      </div>
     </div>
 
     <div class="actions">
-      <%= f.submit class:"btn btn-success" %>
+      <%= f.submit class:"btn btn-success btn-block" %>
     </div>
   <% end %>

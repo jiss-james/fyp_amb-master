@@ -10,6 +10,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    today = Date.today
+    d = Date.new(today.year, @user.date_of_birth.month, @user.date_of_birth.day)
+    @age = d.year - @user.date_of_birth.year - (d > today ? 1 : 0)
   end
 
   def destroy

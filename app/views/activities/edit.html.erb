@@ -1,8 +1,19 @@
-<h1>Editing Activity</h1>
-
-<%= render 'form', activity: @activity %>
-
 <div class="container">
-<%= link_to 'Show', company_activity_path(@company, @activity), class:"btn btn-outline-primary" %> |
-<%= link_to 'Back', company_activity_path(@company), class:"btn btn-secondary" %>
+
+  <div class="card">
+    <h3 class="card-header">Edit Activity</h3>
+
+    <div style="padding:20px">
+      <%= render 'form', activity: @activity %>
+    </div>
+
+    <div class="card-footer">
+      <%= link_to 'Show', company_activity_path(@company, @activity), class:"btn btn-outline-primary btn-block" %>
+      <br/>
+      <br/>
+      <%= link_to 'Back', company_activity_path(@company), class:"btn btn-secondary btn-block" %>
+    </div>
+
+  </div>
+
 </div>

@@ -1,8 +1,21 @@
 <div class="container">
-  <h1>Editing Company</h1>
 
-  <%= render 'form', company: @company %>
+  <div class="card">
+    <h3 class="card-header">Edit Organisation</h3>
 
-  <%= link_to 'Show', @company , class:"btn btn-outline-primary" %> |
-  <%= link_to 'Back', companies_path, class:"btn btn-secondary" %>
+    <div style="padding:20px">
+
+      <%= render 'form', company: @company %>
+
+    </div>
+
+    <div class="card-footer">
+      <%= link_to 'Show', @company , class:"btn btn-outline-primary btn-block" %>
+      <br/>
+      <br/>
+      <%= link_to 'Back', companies_path, class:"btn btn-secondary btn-block" %>
+    </div>
+
+  </div>
+
 </div>

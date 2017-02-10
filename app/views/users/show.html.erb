@@ -1,71 +1,91 @@
 <div class="container">
 
-  <div class="row">
-    <div class="col-4">
-      <%= image_tag(@user.image_url(:med)) if @user.image? %>
-
-      <h1><%= @user.first_name %> <%= @user.last_name %></h1>
-
-      <strong>Date of Birth:</strong> <%= @user.date_of_birth.strftime("%B %d, %Y") %>
-      <br/>
-      <% if @user.gender? %>
-      <strong>Gender:</strong> <%= @user.gender.capitalize %>
-      <br/>
-      <%end%>
-      <% if @user.mobile? %>
-      <strong>Mobile:</strong> <%= @user.mobile %>
-      <br/>
-      <%end%>
-      <% if @user.telephone? %>
-      <strong>Telephone:</strong> <%= @user.telephone %>
-      <br/>
-      <%end%>
-      <br/>
+  <div class="card-group">
+  <div class="card">
+    <% if @user.image? %>
+    <%= image_tag @user.image_url(:lrg), class:"card-img-top" %>
+    <% end %>
+    <div class="card-block">
+      <h4 class="card-title"><%= @user.first_name %> <%= @user.last_name %></h4>
+      <p class="card-text"><strong>Age: </strong><%= @age%> yrs</p>
+      <p class="card-text"><strong>Profession: </strong><%= @user.profession%></p>
+      <p class="card-text"><strong>Description: </strong><%= @user.description%></p>
+      <p class="card-text"><strong>Work Experience: </strong><%= @user.work_experience%></p>
       <% unless @user.id == current_user.id %>
         <%= link_to 'Send a Message', new_conversation_path(:receiver_id => @user.id), class:"btn btn-outline-success" %>
-        <br/>
-        <br/>
+        <br/><br/>
       <%end%>
       <% if @user.id == current_user.id %>
         <%= link_to 'Edit Profile', edit_user_registration_path, class:"btn btn-outline-primary" %>
         <% elsif current_user.admin? %>
         <%= button_to "Cancel Account", user_path(@user), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger" %>
       <%end%>
-
     </div>
-    <div class="col-8">
-      <% if @user.profession? %>
-      <strong>Profession:</strong> <%= @user.profession %>
-      <br/>
-      <br/>
-      <%end%>
-      <% if @user.description? %>
-      <strong>Description:</strong> <%= @user.description %>
-      <br/>
-      <br/>
-      <%end%>
-      <% if @user.work_experience? %>
-      <strong>Work Experience:</strong> <%= @user.work_experience %>
-      <br/>
-      <br/>
-      <%end%>
-      <% if @user.current_location? %>
-      <strong>Address:</strong> <%= @user.current_location %>
-      <br/>
-      <div id="mapouter">
-        <div id="gmap_canvas">
-          <iframe width="600" height="500" frameborder="0" scrolling="no" marginheight="0" src="https://maps.google.com/maps?q=<%= @user.current_location %>, IE, &t=&z=17&ie=UTF8&iwloc=&output=embed" marginwidth="0"></iframe>
-          <a class="addmaps"href="http://www.map-embed.com/wordpress-themes/"id="get-map-data">Cork, IE, </a>
-        </div>
-        <style>#gmap_canvas{height:500px;width:600px;}#mapouter{overflow:hidden;height:500px;width:600px;}</style>
-      </div>
-      <%end%>
-
-    </div>
-
-
+  </div>
   </div>
 
+  <div class="card-group">
+  <% if @user.gender? %>
+    <div class="card text-center">
+      <div class="card-block">
+        <h4 class="card-title">Gender:
+          <%if @user.gender.capitalize == "Male"%>
+            <i class="fa fa-mars fa-2x" aria-hidden="true"></i>
+          <%else%>
+            <i class="fa fa-venus fa-2x" aria-hidden="true"></i>
+          <%end%>
+        </h4>
+      </div>
+    </div>
+  <%end%>
+  <% if @user.vehicle? %>
+    <div class="card text-center">
+      <div class="card-block">
+        <h4 class="card-title">Vehicle: <i class="fa fa-car fa-2x" aria-hidden="true"></i></h4>
+      </div>
+    </div>
+  <%end%>
+  <div class="card text-center">
+    <div class="card-block">
+      <h4 class="card-title">Available?:
+        <% if @user.available_for_work?%>
+          <i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>
+        <%else%>
+          <i class="fa fa-thumbs-down fa-2x" aria-hidden="true"></i>
+        <%end%>
+      </h4>
+    </div>
+  </div>
+  <% if @user.mobile? %>
+    <div class="card text-center">
+      <div class="card-block">
+        <h4 class="card-title"><i class="fa fa-mobile fa-2x" aria-hidden="true"></i> <%= @user.mobile%></h4>
+      </div>
+    </div>
+  <%end%>
+  <% if @user.telephone? %>
+    <div class="card text-center">
+      <div class="card-block">
+        <h4 class="card-title"><i class="fa fa-phone fa-2x" aria-hidden="true"></i> <%= @user.telephone%></h4>
+      </div>
+    </div>
+  <%end%>
+</div>
 
+<% if @user.current_location? %>
+<div class="card-group">
+  <div class="card text-center">
+    <div class="card-block">
+      <div id="mapouter">
+        <div id="gmap_canvas">
+          <iframe width="1060" height="500" frameborder="0" scrolling="no" marginheight="0" src="https://maps.google.com/maps?q=<%= @user.current_location %>, IE, &t=&z=17&ie=UTF8&iwloc=&output=embed" marginwidth="0"></iframe>
+          <!-- <a class="addmaps"href="http://www.map-embed.com/wordpress-themes/"id="get-map-data">Cork, IE, </a> -->
+        </div>
+        <style>#gmap_canvas{height:500px;width:1060px;}#mapouter{overflow:hidden;height:500px;width:1060px;}</style>
+      </div>
+    </div>
+  </div>
+</div>
+<%end%>
 
 </div>
