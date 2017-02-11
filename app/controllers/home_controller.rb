@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   def index
 
     # 143.239.9.27
-    @location = Geocoder.search(request.location).first.city # => "Cork"
+    @location = Geocoder.search(request.remote_ip).first.city # => "Cork"
     @companies = Company.near(@location, 50).limit(3)
     @activities = Activity.near(@location, 50).limit(3)
     @users = User.near(@location, 50).limit(3)
