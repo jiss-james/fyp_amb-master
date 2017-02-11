@@ -1,50 +1,54 @@
 <div class="container">
-  <div class="row">
-    <div class="col-4">
-      <%= image_tag(@company.image_url(:med)) if @company.image? %>
-      <h1><%= @company.company_name %></h1>
-      <br/>
 
-      <h4>All related Activites:</h4>
-      <div class="list-group">
-        <% if can? :manage, @company %>
-        <a href="/companies/<%= @company.id %>/activities/new" class="list-group-item list-group-item-action list-group-item-success">
-          Create New Activity
-        </a>
+  <div class="card-group">
+    <div class="card">
+      <div class="card-block">
+        <% if @company.image? %>
+        <%= image_tag @company.image_url(:lrg), class:"card-img-top", style:"height:500px, width:100%" %>
         <% end %>
-        <% @company.activities.each do |activity| %>
-        <a href="/companies/<%= @company.id %>/activities/<%= activity.id %>" class="list-group-item list-group-item-action"><%= activity.activity_name%></a>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="col-8">
-      <strong>Description:</strong> <%= @company.description %>
-      <br/>
-      <br/>
-      <% if @company.location? %>
-      <strong>Address:</strong> <%= @company.location %>
-      <br/>
-      <div id="mapouter">
-        <div id="gmap_canvas">
-          <iframe width="600" height="500" frameborder="0" scrolling="no" marginheight="0" src="https://maps.google.com/maps?q=<%= @company.location %>, IE, &t=&z=17&ie=UTF8&iwloc=&output=embed" marginwidth="0"></iframe>
-          <a class="addmaps"href="http://www.map-embed.com/wordpress-themes/"id="get-map-data">Cork, IE, </a>
+        <div class="card-block">
+          <h4 class="card-title"><%= @company.company_name %></h4>
+          <p class="card-text"><strong>Description: </strong><%= @company.description%></p>
+          <% if can? :update, @company %>
+          <%= link_to 'Edit', edit_company_path(@company), class: "btn btn-outline-primary" %>
+          |
+          <% end %>
+          <% if can? :destroy, @company %>
+          <%= link_to 'Delete', company_path(@company), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-outline-danger" %>
+          |
+          <% end %>
+          <%= link_to 'Back', companies_path, class: "btn btn-secondary" %>
+          <br/>
+          <br/>
+          <h4>All related Activites:</h4>
+          <div class="list-group">
+            <% if can? :manage, @company %>
+            <a href="/companies/<%= @company.id %>/activities/new" class="list-group-item list-group-item-action list-group-item-success">
+              Create New Activity
+            </a>
+            <% end %>
+            <% @company.activities.each do |activity| %>
+            <a href="/companies/<%= @company.id %>/activities/<%= activity.id %>" class="list-group-item list-group-item-action"><%= activity.activity_name%></a>
+            <% end %>
+          </div>
         </div>
-        <style>#gmap_canvas{height:500px;width:600px;}#mapouter{overflow:hidden;height:500px;width:600px;}</style>
       </div>
-      <%end%>
-      <br/>
-      <% if can? :update, @company %>
-      <%= link_to 'Edit', edit_company_path(@company), class: "btn btn-outline-primary" %>
-      |
-      <% end %>
-      <% if can? :destroy, @company %>
-      <%= link_to 'Delete', company_path(@company), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-outline-danger" %>
-      |
-      <% end %>
-      <%= link_to 'Back', companies_path, class: "btn btn-secondary" %>
-
     </div>
   </div>
+
+  <% if @company.location? %>
+  <div class="card-group">
+    <div class="card text-center">
+      <div class="card-block">
+        <div id="mapouter">
+          <div id="gmap_canvas">
+            <iframe width="1060" height="500" frameborder="0" scrolling="no" marginheight="0" src="https://maps.google.com/maps?q=<%= @company.location %>, IE, &t=&z=17&ie=UTF8&iwloc=&output=embed" marginwidth="0"></iframe>
+          </div>
+          <style>#gmap_canvas{height:500px;width:1060px;}#mapouter{overflow:hidden;height:500px;width:1060px;}</style>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%end%>
 
 </div>

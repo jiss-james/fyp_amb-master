@@ -1,28 +1,81 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
 
-  <div class="row">
-    <div class="col-4">
-      <%= image_tag(@activity.image_url(:med)) if @activity.image? %>
-      <h1><%= @activity.activity_name %></h1>
-      <% if @activity.mobile? %>
-      <strong>Mobile No:</strong> <%= @activity.mobile %>
-      <br/>
-      <%end%>
-      <% if @activity.telephone? %>
-      <strong>Telephone No:</strong> <%= @activity.telephone %>
-      <%end%>
-      <br/>
-      <% if @user.id == current_user.id %>
-      <%= link_to 'Find Help Nearby', search_path(:q => @activity.location, :category => "ulocation"), class:"btn btn-outline-warning" %>
-      <%end%>
-      <br/>
-      <% unless @user.id == current_user.id %>
-      <%= link_to 'Message Owner', new_conversation_path(:receiver_id => @user.id), class:"btn btn-outline-success" %>
-      <%end%>
+  <div class="card-group">
+    <div class="card">
+      <div class="card-block">
+        <% if @activity.image? %>
+        <%= image_tag @activity.image_url(:lrg), class:"card-img-top", style:"height:500px, width:100%" %>
+        <% end %>
+        <div class="card-block">
+          <h4 class="card-title"><%= @activity.activity_name %></h4>
+          <p class="card-text"><strong>Start Date: </strong><%= @activity.start_date.strftime("%d/%m/%Y")%></p>
+          <p class="card-text"><strong>End Date: </strong><%= @activity.end_date.strftime("%d/%m/%Y")%></p>
+          <p class="card-text"><strong>Description: </strong><%= @activity.description%></p>
+          <% if @user.id == current_user.id %>
+          <%= link_to 'Find Help Nearby', search_path(:q => @activity.location, :category => "ulocation"), class:"btn btn-outline-warning" %>
+          <%end%>
+          <br/>
+          <br/>
+          <% unless @user.id == current_user.id %>
+          <%= link_to 'Message Owner', new_conversation_path(:receiver_id => @user.id), class:"btn btn-outline-success" %>
+          <%end%>
+          <% if can? :update, @activity %>
+          <%= link_to 'Edit', edit_company_activity_path(@company, @activity), class: "btn btn-outline-primary" %>
+          |
+          <% end %>
+          <% if can? :destroy, @activity %>
+          <%= link_to "Delete", company_activity_path(@company, @activity), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-outline-danger" %>
+          |
+          <% end %>
+          <%= link_to 'Back', company_activities_path(@company), class: "btn btn-secondary" %>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="col-8">
+  <div class="card-group">
+    <% if @activity.vehicle? %>
+      <div class="card text-center">
+        <div class="card-block">
+          <h4 class="card-title">Vehicle: <i class="fa fa-car fa-lg" aria-hidden="true"></i></h4>
+        </div>
+      </div>
+    <%end%>
+    <% if @activity.mobile? %>
+      <div class="card text-center">
+        <div class="card-block">
+          <h4 class="card-title"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i> <%= @activity.mobile%></h4>
+        </div>
+      </div>
+    <%end%>
+    <% if @activity.telephone? %>
+      <div class="card text-center">
+        <div class="card-block">
+          <h4 class="card-title"><i class="fa fa-phone fa-lg" aria-hidden="true"></i> <%= @activity.telephone%></h4>
+        </div>
+      </div>
+    <%end%>
+  </div>
+
+  <% if @activity.location? %>
+  <div class="card-group">
+    <div class="card text-center">
+      <div class="card-block">
+        <div id="mapouter">
+          <div id="gmap_canvas">
+            <iframe width="1060" height="500" frameborder="0" scrolling="no" marginheight="0" src="https://maps.google.com/maps?q=<%= @activity.location %>, IE, &t=&z=17&ie=UTF8&iwloc=&output=embed" marginwidth="0"></iframe>
+          </div>
+          <style>#gmap_canvas{height:500px;width:1060px;}#mapouter{overflow:hidden;height:500px;width:1060px;}</style>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%end%>
+
+
+
+    <!-- <div class="col-8">
       <strong>Description:</strong> <%= @activity.description %>
       <br/>
       <br/>
@@ -58,6 +111,6 @@
       <br/>
 
     </div>
-  </div>
+  </div> -->
 
 </div>
