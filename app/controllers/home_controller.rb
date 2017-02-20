@@ -4,11 +4,33 @@ class HomeController < ApplicationController
 
   def index
 
-    # 143.239.9.27
-    @location = Geocoder.search(request.remote_ip).first.city # => "Cork"
-    @companies = Company.near(@location, 50).limit(3)
-    @activities = Activity.near(@location, 50).limit(3)
-    @users = User.near(@location, 50).limit(3)
+    # 193.1.253.139
+    @location = Geocoder.search('143.239.9.1').first.city # => "Cork"
+    # @location = Geocoder.search(request.remote_ip).first.city # => "Cork"
+
+    @noofcompanies = Company.near(@location, 50).size
+    if @noofcompanies > 4
+      @lotsofcompanies = true
+    else
+      @lotsofcompanies = false
+    end
+    @companies = Company.near(@location, 50).limit(4)
+
+    @noofactivities = Activity.near(@location, 50).size
+    if @noofactivities > 4
+      @lotsofactivities = true
+    else
+      @lotsofactivities = false
+    end
+    @activities = Activity.near(@location, 50).limit(4)
+
+    @noofusers = User.near(@location, 50).size
+    if @noofusers > 4
+      @lotsofusers = true
+    else
+      @lotsofusers = false
+    end
+    @users = User.near(@location, 50).limit(4)
 
   end
 
