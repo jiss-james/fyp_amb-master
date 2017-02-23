@@ -1,3 +1,26 @@
 // Place all the styles related to the page controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#teamimg{
+  background-image: url("/Team.png");
+  background-size: cover;
+  height: 300px;
+}
+
+#techimg{
+  background-image: url("/Tech.png");
+  background-size: cover;
+  height: 200px;
+}
+
+#privacyimg{
+  background-image: url("/Privacy.png");
+  background-size: cover;
+  height: 300px;
+}
+
+#layoutimg{
+  background-image: url("/Org_Act_You.png");
+  background-size: cover;
+  height: 700px;
+}
