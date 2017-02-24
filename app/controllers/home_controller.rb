@@ -5,8 +5,8 @@ class HomeController < ApplicationController
   def index
 
     # 193.1.253.139
-    @location = Geocoder.search('143.239.9.1').first.city # => "Cork"
-    # @location = Geocoder.search(request.remote_ip).first.city # => "Cork"
+    # @location = Geocoder.search('143.239.9.1').first.city # => "Cork"
+    @location = Geocoder.search(request.remote_ip).first.city # => "Cork"
 
     @noofcompanies = Company.near(@location, 50).size
     if @noofcompanies > 4
