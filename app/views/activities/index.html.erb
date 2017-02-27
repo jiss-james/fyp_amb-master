@@ -1,41 +1,34 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Activities</h1>
+<div class="container">
 
-<table>
-  <thead>
-    <tr>
-      <th>Activity name</th>
-      <th>Description</th>
-      <th>Start date</th>
-      <th>End date</th>
-      <th>Location</th>
-      <th>Vehicle</th>
-      <th>Mobile</th>
-      <th>Telephone</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <% if current_user.admin? %>
+  <br/>
+  <h1>All Activities</h1>
+  <br/>
 
-  <tbody>
+  <div class="row">
+    <div class="card-deck">
     <% @activities.each do |activity| %>
-      <tr>
-        <td><%= activity.activity_name %></td>
-        <td><%= activity.description %></td>
-        <td><%= activity.start_date %></td>
-        <td><%= activity.end_date %></td>
-        <td><%= activity.location %></td>
-        <td><%= activity.vehicle %></td>
-        <td><%= activity.mobile %></td>
-        <td><%= activity.telephone %></td>
-        <td><%= link_to 'Show', activity %></td>
-        <td><%= link_to 'Edit', edit_activity_path(activity) %></td>
-        <td><%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <div class="card text-center" style="width: 17rem;">
+        <% if activity.image? %>
+        <%= image_tag activity.image_url(:med), class:"card-img-top" %>
+        <% end %>
+        <div class="card-block">
+          <h4 class="card-title">
+            <%= activity.activity_name %>
+          </h4>
+          <p class="card-text">
+            <%= activity.location %>
+          </p>
+        </div>
+        <div class="card-footer">
+          <%= link_to "Go to Activity", company_activity_path(activity.company.id, activity.id), class:"btn btn-outline-primary" %>
+        </div>
+      </div>
+      <%end%>
+    </div>
+  </div>
+  <%end%>
 
-<br>
-
-<%= link_to 'New Activity', new_activity_path %>
+</div>

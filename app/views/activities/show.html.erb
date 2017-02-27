@@ -20,6 +20,10 @@
           <% unless @user.id == current_user.id %>
           <%= link_to 'Message Owner', new_conversation_path(:receiver_id => @user.id), class:"btn btn-outline-success" %>
           <%end%>
+          <% if  current_user.admin? %>
+          <%= link_to 'Company Profile', company_path(@activity.company_id), class: "btn btn-outline-warning" %>
+          |
+          <% end %>
           <% if can? :update, @activity %>
           <%= link_to 'Edit', edit_company_activity_path(@company, @activity), class: "btn btn-outline-primary" %>
           |
