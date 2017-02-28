@@ -28,7 +28,6 @@
           <% end %>
           <% if can? :destroy, @activity %>
           <%= link_to "Delete", company_activity_path(@company, @activity), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-outline-danger" %>
-          |
           <% end %>
         </div>
       </div>
