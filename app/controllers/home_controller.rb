@@ -24,13 +24,15 @@ class HomeController < ApplicationController
     end
     @activities = Activity.near(@location, 50).limit(4)
 
-    @noofusers = User.near(@location, 50).size
+    #find all users who are ready to work
+    @users = User.where(available_for_work: true)
+    @noofusers = @users.near(@location, 50).size
     if @noofusers > 4
       @lotsofusers = true
     else
       @lotsofusers = false
     end
-    @users = User.near(@location, 50).limit(4)
+    @users = @users.near(@location, 50).limit(4)
 
   end
 
