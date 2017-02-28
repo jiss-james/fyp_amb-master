@@ -16,7 +16,8 @@ class SearchController < ApplicationController
       @results = @users + @activities
       @genre = "Location"
     elsif @category == "ulocation"
-      @users = User.near(@q, 50)
+      @users = User.where(available_for_work: true)
+      @users = @users.near(@q, 50)
       @results = @users
       @genre = "Location"
     elsif @category == "alocation"
