@@ -1,19 +1,25 @@
 class ActivitiesController < ApplicationController
+
+  #before doing any action we will see if the user is logged in
   before_action :authenticate_user!
+  #finds the related company
   before_action :set_company
+  #sets up cancancan abilities
   load_and_authorize_resource
 
   # GET /activities
   # GET /activities.json
   def index
-    # @activities = Activity.all
+    # redirects to company page, because it already lists all the associated activities
     redirect_to @company
   end
 
   # GET /activities/1
   # GET /activities/1.json
   def show
+    #finds the activity with the id
     @activity = @company.activities.find(params[:id])
+    #finds the associated user
     @user = User.find(@company.user_id)
   end
 
@@ -79,6 +85,7 @@ class ActivitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def activity_params
+      #these parametes are required before it can be saved.
       params.require(:activity).permit(:activity_name, :description, :start_date, :end_date, :location, :vehicle, :mobile, :telephone, :image)
     end
 end

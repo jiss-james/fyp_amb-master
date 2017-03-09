@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
+    #these parameters are need on registration
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :email, :password, :password_confirmation, :date_of_birth])
+    #these parameters are need on account update
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :email, :password, :password_confirmation, :date_of_birth, :gender, :profession, :description, :work_experience, :current_location, :vehicle, :available_for_work, :image, :mobile, :telephone])
   end
 

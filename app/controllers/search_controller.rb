@@ -1,7 +1,9 @@
 class SearchController < ApplicationController
 
   def results
+    #the search item
     @q = params[:q]
+    #the category they are searching
     @category = params[:category]
     @genre = ""
     if @category == "activity"
@@ -15,6 +17,7 @@ class SearchController < ApplicationController
       @activities = Activity.near(@q, 50)
       @results = @users + @activities
       @genre = "Location"
+      #only search for users who are available to work
     elsif @category == "ulocation"
       @users = User.where(available_for_work: true)
       @users = @users.near(@q, 50)

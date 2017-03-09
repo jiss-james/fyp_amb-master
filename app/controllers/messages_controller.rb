@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+
   before_action :authenticate_user!
   before_action :set_conversation
   load_and_authorize_resource
@@ -21,6 +22,7 @@ class MessagesController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_conversation
+    #find the related conversation
     @conversation = Conversation.find(params[:conversation_id])
   end
 

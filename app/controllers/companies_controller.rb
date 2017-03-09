@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
 
+  #make sure the user is logged in for every action, except show
   before_action :authenticate_user!, except: [:show]
   load_and_authorize_resource
 

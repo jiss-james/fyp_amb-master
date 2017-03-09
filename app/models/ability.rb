@@ -1,6 +1,7 @@
 class Ability
   include CanCan::Ability
 
+  #this class manages who can do what and sets up roles and abilities
   def initialize(user)
 
     user ||= User.new # guest user (not logged in)
